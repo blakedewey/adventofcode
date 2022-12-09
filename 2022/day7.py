@@ -13,9 +13,8 @@ def main(input_filename):
             dirsize = sum([int(item.split(' ')[0]) 
                            for item in line.split('\n')[1:]
                            if not item.startswith('dir')])
-            dirsizes[tuple(pwd)] += dirsize
-            for i in range(1, len(pwd)):
-                dirsizes[tuple(pwd[:-i])] += dirsize
+            for i in range(1, len(pwd) + 1):
+                dirsizes[tuple(pwd[:i])] += dirsize
     p1_ans = sum([dirsize for dirsize in dirsizes.values() if dirsize <= 100000])
     needed_space = 30000000 - (70000000 - dirsizes[('',)])
     p2_ans = min([dirsize for dirsize in dirsizes.values() if dirsize >= needed_space])
